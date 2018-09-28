@@ -29,19 +29,6 @@ services:
         aliases:
           - jira
 
-  bamboo:
-    image: hub.slyak.com/bamboo
-    restart: always
-    volumes:
-      - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
-      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bamboo
-
   bitbucket:
     image: hub.slyak.com/bitbucket
     restart: always
