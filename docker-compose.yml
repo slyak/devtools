@@ -1,0 +1,85 @@
+version: '2.0'
+services:
+  nginx:
+    image: hub.slyak.com/nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - jira
+      - crowd
+      - bamboo
+      - bitbucket
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - dev.slyak.com
+
+  jira:
+    image: hub.slyak.com/jira
+    restart: always
+    volumes:
+      - /opt/data/atlassian/jira:/var/atlassian/jira
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - jira
+
+  bamboo:
+    image: hub.slyak.com/bamboo
+    restart: always
+    volumes:
+      - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
+      - /var/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bamboo
+
+  bitbucket:
+    image: hub.slyak.com/bitbucket
+    restart: always
+    links:
+      - crowd
+    volumes:
+      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
+      - /opt/data/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bitbucket
+
+  confluence:
+    image: hub.slyak.com/confluence
+    restart: always
+    links:
+      - crowd
+    volumes:
+      - /opt/data/atlassian/confluence:/var/atlassian/confluence
+      - /opt/data/atlassian/confluence/logs:/opt/atlassian/confluence/logs
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+        - confluence
+
+  crowd:
+      image: hub.slyak.com/crowd
+      restart: always
+      volumes:
+        - /opt/data/atlassian/crowd:/var/atlassian/crowd
+      env_file:
+        - common.env
+      networks:
+        dev:
+          aliases:
+          - crowd
