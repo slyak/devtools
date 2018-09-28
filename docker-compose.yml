@@ -1,5 +1,25 @@
 version: '2.0'
 services:
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - jira
+      - bitbucket
+      - confluence
+      - crowd
+      - nexus
+      - portainer
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - nginx
+    container_name: nginx
+
   jira:
     image: hub.slyak.com/jira
     restart: always
@@ -11,6 +31,7 @@ services:
       dev:
         aliases:
           - jira
+    container_name: jira
 
   bitbucket:
     image: hub.slyak.com/bitbucket
@@ -26,6 +47,7 @@ services:
       dev:
         aliases:
           - bitbucket
+    container_name: bitbucket
 
   confluence:
     image: hub.slyak.com/confluence
@@ -41,6 +63,7 @@ services:
       dev:
         aliases:
         - confluence
+    container_name: confluence
 
   crowd:
       image: hub.slyak.com/crowd
@@ -53,6 +76,29 @@ services:
         dev:
           aliases:
           - crowd
+      container_name: crowd
+
+  nexus:
+     image: sonatype/nexus:oss
+     restart: always
+     volumes:
+      - /opt/data/nexus:/sonatype-work
+     networks:
+       dev:
+         aliases:
+         - nexus
+     container_name: nexus
+
+  portainer:
+    image: portainer/portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      dev:
+        aliases:
+          - portainer
+    container_name: portainer
 
 networks:
   dev:
