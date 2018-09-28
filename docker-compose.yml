@@ -83,3 +83,6 @@ services:
         dev:
           aliases:
           - crowd
+
+networks:
+  dev:
