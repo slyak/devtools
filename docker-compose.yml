@@ -1,22 +1,5 @@
 version: '2.0'
 services:
-  nginx:
-    image: hub.slyak.com/nginx
-    restart: always
-    ports:
-      - 80:80
-    depends_on:
-      - jira
-      - crowd
-      - bamboo
-      - bitbucket
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - dev.aiyx.com
-
   jira:
     image: hub.slyak.com/jira
     restart: always
