@@ -15,7 +15,7 @@ services:
     networks:
       dev:
         aliases:
-          - dev.slyak.com
+          - dev.aiyx.com
 
   jira:
     image: hub.slyak.com/jira
