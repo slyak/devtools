@@ -75,7 +75,7 @@ services:
       privileged: true
       volumes:
         - /opt/data/atlassian/crowd:/var/atlassian/crowd
-        -
+        - /opt/data/atlassian/crowd/conf:/opt/atlassian/crowd/apache-tomcat/conf
       env_file:
         - common.env
       networks:
