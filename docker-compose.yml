@@ -26,7 +26,7 @@ services:
     privileged: true
     volumes:
       - /opt/data/atlassian/jira:/var/atlassian/jira
-      - /opt/data/atlassian/jira/conf:/opt/atlassian/jira/conf
+      - /opt/data/atlassian/jira-conf:/opt/atlassian/jira/conf
     env_file:
       - common.env
     networks:
@@ -43,7 +43,7 @@ services:
       - crowd
     volumes:
       - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
-      - /opt/data/atlassian/bitbucket/conf:/opt/atlassian/bitbucket/conf
+      - /opt/data/atlassian/bitbucket-conf:/opt/atlassian/bitbucket/conf
     env_file:
       - common.env
     networks:
@@ -60,7 +60,7 @@ services:
       - crowd
     volumes:
       - /opt/data/atlassian/confluence:/var/atlassian/confluence
-      - /opt/data/atlassian/confluence/conf:/opt/atlassian/confluence/conf
+      - /opt/data/atlassian/confluence-conf:/opt/atlassian/confluence/conf/
     env_file:
       - common.env
     networks:
@@ -75,7 +75,7 @@ services:
       privileged: true
       volumes:
         - /opt/data/atlassian/crowd:/var/atlassian/crowd
-        - /opt/data/atlassian/crowd/conf:/opt/atlassian/crowd/apache-tomcat/conf
+        - /opt/data/atlassian/crowd-conf:/opt/atlassian/crowd/apache-tomcat/conf
       env_file:
         - common.env
       networks:
