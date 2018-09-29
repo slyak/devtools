@@ -23,8 +23,10 @@ services:
   jira:
     image: hub.slyak.com/jira
     restart: always
+    privileged: true
     volumes:
       - /opt/data/atlassian/jira:/var/atlassian/jira
+      - /opt/data/atlassian/jira/conf:/opt/atlassian/jira/conf
     env_file:
       - common.env
     networks:
@@ -36,11 +38,12 @@ services:
   bitbucket:
     image: hub.slyak.com/bitbucket
     restart: always
+    privileged: true
     links:
       - crowd
     volumes:
       - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
-      - /opt/data/atlassian/bitbucket/logs:/opt/atlassian/bitbucket/logs
+      - /opt/data/atlassian/bitbucket/conf:/opt/atlassian/bitbucket/conf
     env_file:
       - common.env
     networks:
@@ -52,11 +55,12 @@ services:
   confluence:
     image: hub.slyak.com/confluence
     restart: always
+    privileged: true
     links:
       - crowd
     volumes:
       - /opt/data/atlassian/confluence:/var/atlassian/confluence
-      - /opt/data/atlassian/confluence/logs:/opt/atlassian/confluence/logs
+      - /opt/data/atlassian/confluence/conf:/opt/atlassian/confluence/conf
     env_file:
       - common.env
     networks:
@@ -68,8 +72,10 @@ services:
   crowd:
       image: hub.slyak.com/crowd
       restart: always
+      privileged: true
       volumes:
         - /opt/data/atlassian/crowd:/var/atlassian/crowd
+        -
       env_file:
         - common.env
       networks:
@@ -81,6 +87,7 @@ services:
   nexus:
      image: sonatype/nexus:oss
      restart: always
+     privileged: true
      volumes:
       - /opt/data/nexus:/sonatype-work
      networks:
@@ -92,6 +99,7 @@ services:
   portainer:
     image: portainer/portainer
     restart: always
+    privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
