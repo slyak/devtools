@@ -9,24 +9,6 @@ server {
         client_max_body_size 10M;
     }
 
-    location /bitbucket {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        set $upstream_bitbucket bitbucket;
-        proxy_pass http://$upstream_bitbucket:7990;
-        client_max_body_size 10M;
-    }
-
-    location /confluence {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        set $upstream_confluence confluence;
-        proxy_pass http://$upstream_confluence:8090;
-        client_max_body_size 10M;
-    }
-
     location /crowd {
         set $upstream_crowd crowd;
         proxy_pass http://$upstream_crowd:8095;
@@ -34,24 +16,6 @@ server {
         proxy_set_header    X-Real-IP       $remote_addr;
         proxy_set_header    X-Forwarded-for $remote_addr;
         port_in_redirect off;
-        client_max_body_size 10M;
-    }
-
-    location /portainer {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        set $upstream_portainer portainer;
-        proxy_pass http://$upstream_portainer:9000;
-        client_max_body_size 10M;
-    }
-
-    location /nexus {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        set $upstream_nexus nexus;
-        proxy_pass http://$upstream_nexus:8081;
         client_max_body_size 10M;
     }
 }

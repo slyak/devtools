@@ -7,11 +7,11 @@ services:
       - 80:80
     depends_on:
       - jira
-      - bitbucket
-      - confluence
-      - crowd
-      - nexus
-      - portainer
+#      - bitbucket
+#      - confluence
+#      - crowd
+#      - nexus
+#      - portainer
     env_file:
       - common.env
     networks:
@@ -26,6 +26,8 @@ services:
     privileged: true
     volumes:
       - /opt/data/atlassian/jira:/var/atlassian/jira
+    ports:
+      - 8080:8080
     env_file:
       - common.env
     networks:
@@ -34,75 +36,82 @@ services:
           - jira
     container_name: jira
 
-  bitbucket:
-    image: hub.slyak.com/bitbucket
-    restart: always
-    privileged: true
-    links:
-      - crowd
-    volumes:
-      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bitbucket
-    container_name: bitbucket
-
-  confluence:
-    image: hub.slyak.com/confluence
-    restart: always
-    privileged: true
-    links:
-      - crowd
-    volumes:
-      - /opt/data/atlassian/confluence:/var/atlassian/confluence
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-        - confluence
-    container_name: confluence
-
-  crowd:
-      image: hub.slyak.com/crowd
-      restart: always
-      privileged: true
-      volumes:
-        - /opt/data/atlassian/crowd:/var/atlassian/crowd
-      env_file:
-        - common.env
-      networks:
-        dev:
-          aliases:
-          - crowd
-      container_name: crowd
-
-  nexus:
-     image: sonatype/nexus:oss
-     restart: always
-     privileged: true
-     volumes:
-      - /opt/data/nexus:/sonatype-work
-     networks:
-       dev:
-         aliases:
-         - nexus
-     container_name: nexus
-
-  portainer:
-    image: portainer/portainer
-    restart: always
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      dev:
-        aliases:
-          - portainer
-    container_name: portainer
+#  bitbucket:
+#    image: hub.slyak.com/bitbucket
+#    restart: always
+#    privileged: true
+#    links:
+#      - crowd
+#    volumes:
+#      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
+#    ports:
+#      - 7990:7990
+#      - 7999:7999
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - bitbucket
+#    container_name: bitbucket
+#
+#  confluence:
+#    image: hub.slyak.com/confluence
+#    restart: always
+#    privileged: true
+#    links:
+#      - crowd
+#    volumes:
+#      - /opt/data/atlassian/confluence:/var/atlassian/confluence
+#    ports:
+#      - 8090:8090
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#        - confluence
+#    container_name: confluence
+#
+#  crowd:
+#      image: hub.slyak.com/crowd
+#      restart: always
+#      privileged: true
+#      volumes:
+#        - /opt/data/atlassian/crowd:/var/atlassian/crowd
+#    ports:
+#      - 8095:8095
+#      env_file:
+#        - common.env
+#      networks:
+#        dev:
+#          aliases:
+#          - crowd
+#      container_name: crowd
+#
+#  nexus:
+#     image: sonatype/nexus:oss
+#     restart: always
+#     privileged: true
+#     volumes:
+#      - /opt/data/nexus:/sonatype-work
+#     networks:
+#       dev:
+#         aliases:
+#         - nexus
+#     container_name: nexus
+#
+#  portainer:
+#    image: portainer/portainer
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      dev:
+#        aliases:
+#          - portainer
+#    container_name: portainer
 
 networks:
   dev:
