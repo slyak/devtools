@@ -80,7 +80,7 @@ services:
     volumes:
       - /opt/data/atlassian/crowd:/var/atlassian/crowd
     ports:
-    - 8095:8095
+      - 8095:8095
     env_file:
       - common.env
     networks:
