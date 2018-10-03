@@ -1,5 +1,16 @@
 server {
     server_name ${X_PROXY_NAME};
+
+    location /crowd {
+        set $upstream_crowd crowd;
+        proxy_pass http://$upstream_crowd:8095;
+        proxy_set_header    Host            $host;
+        proxy_set_header    X-Real-IP       $remote_addr;
+        proxy_set_header    X-Forwarded-for $remote_addr;
+        port_in_redirect off;
+        client_max_body_size 10M;
+    }
+
     location /confluence {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;

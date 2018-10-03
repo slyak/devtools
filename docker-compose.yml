@@ -72,22 +72,22 @@ services:
         aliases:
         - confluence
     container_name: confluence
-#
-#  crowd:
-#      image: hub.slyak.com/crowd
-#      restart: always
-#      privileged: true
-#      volumes:
-#        - /opt/data/atlassian/crowd:/var/atlassian/crowd
-#    ports:
-#      - 8095:8095
-#      env_file:
-#        - common.env
-#      networks:
-#        dev:
-#          aliases:
-#          - crowd
-#      container_name: crowd
+
+  crowd:
+      image: hub.slyak.com/crowd
+      restart: always
+      privileged: true
+      volumes:
+        - /opt/data/atlassian/crowd:/var/atlassian/crowd
+    ports:
+      - 8095:8095
+      env_file:
+        - common.env
+      networks:
+        dev:
+          aliases:
+          - crowd
+      container_name: crowd
 #
 #  nexus:
 #     image: sonatype/nexus:oss
