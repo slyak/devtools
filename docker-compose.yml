@@ -6,10 +6,10 @@ services:
     ports:
       - 80:80
     depends_on:
-      - jira
+#      - jira
 #      - bitbucket
-#      - confluence
-#      - crowd
+      - confluence
+      - crowd
 #      - nexus
 #      - portainer
     env_file:
@@ -20,21 +20,21 @@ services:
           - nginx
     container_name: nginx
 
-  jira:
-    image: hub.slyak.com/jira
-    restart: always
-    privileged: true
-    volumes:
-      - /opt/data/atlassian/jira:/var/atlassian/jira
-    ports:
-      - 8080:8080
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - jira
-    container_name: jira
+#  jira:
+#    image: hub.slyak.com/jira
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /opt/data/atlassian/jira:/var/atlassian/jira
+#    ports:
+#      - 8080:8080
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - jira
+#    container_name: jira
 
 #  bitbucket:
 #    image: hub.slyak.com/bitbucket
@@ -55,23 +55,23 @@ services:
 #          - bitbucket
 #    container_name: bitbucket
 #
-#  confluence:
-#    image: hub.slyak.com/confluence
-#    restart: always
-#    privileged: true
-#    links:
-#      - crowd
-#    volumes:
-#      - /opt/data/atlassian/confluence:/var/atlassian/confluence
-#    ports:
-#      - 8090:8090
-#    env_file:
-#      - common.env
-#    networks:
-#      dev:
-#        aliases:
-#        - confluence
-#    container_name: confluence
+  confluence:
+    image: hub.slyak.com/confluence
+    restart: always
+    privileged: true
+    links:
+      - crowd
+    volumes:
+      - /opt/data/atlassian/confluence:/var/atlassian/confluence
+    ports:
+      - 8090:8090
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+        - confluence
+    container_name: confluence
 #
 #  crowd:
 #      image: hub.slyak.com/crowd
