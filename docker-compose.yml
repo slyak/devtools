@@ -12,7 +12,7 @@ services:
       - bamboo
       - nexus
     volumes:
-      - /opt/data/nginx/html:/usr/share/nginx/html
+      - /opt/data/nginx/html:/usr/share/nginx/html:ro
     env_file:
       - common.env
     networks:
