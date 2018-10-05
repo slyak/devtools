@@ -11,6 +11,8 @@ services:
       - confluence
       - bamboo
       - nexus
+    volumes:
+      - /opt/data/nginx/html:/usr/share/nginx/html
     env_file:
       - common.env
     networks:
