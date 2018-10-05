@@ -69,7 +69,7 @@ services:
     container_name: confluence
 
   bamboo:
-    image: slyak/bamboo
+    image: hub.slyak.com/bamboo
     restart: always
     volumes:
       - /var/atlassian/bamboo:/var/atlassian/bamboo
