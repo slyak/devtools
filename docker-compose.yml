@@ -117,7 +117,8 @@ services:
       - MYSQL_ROOT_PASSWORD:123456
      volumes:
       - /opt/data/mysql:/var/lib/mysql
-      - /opt/data/my.cnf:/etc/my.cnf
+      - ./mysql/my.cnf:/etc/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d/
      container_name: mysql
 
 networks:
