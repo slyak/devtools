@@ -7,10 +7,10 @@ services:
       - 80:80
     depends_on:
       - jira
-#      - bitbucket
-#      - confluence
-#      - bamboo
-#      - nexus
+      - bitbucket
+      - confluence
+      - bamboo
+      - nexus
     env_file:
       - common.env
     networks:
@@ -34,6 +34,67 @@ services:
         aliases:
           - jira
     container_name: jira
+
+  bitbucket:
+    image: hub.slyak.com/bitbucket
+    restart: always
+    privileged: true
+    volumes:
+      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
+    ports:
+      - 7990:7990
+      - 7999:7999
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bitbucket
+    container_name: bitbucket
+
+  confluence:
+    image: hub.slyak.com/confluence
+    restart: always
+    privileged: true
+    volumes:
+      - /opt/data/atlassian/confluence:/var/atlassian/confluence
+    ports:
+      - 8090:8090
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+        - confluence
+    container_name: confluence
+
+  bamboo:
+    image: hub.slyak.com/bamboo
+    restart: always
+    volumes:
+      - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
+      - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+    ports:
+        - 8085:8085
+    env_file:
+      - common.env
+    networks:
+      dev:
+        aliases:
+          - bamboo
+    container_name: bamboo
+
+  nexus:
+     image: sonatype/nexus:oss
+     restart: always
+     privileged: true
+     volumes:
+      - /opt/data/nexus:/sonatype-work
+     networks:
+       dev:
+         aliases:
+         - nexus
+     container_name: nexus
 
 networks:
   dev:
