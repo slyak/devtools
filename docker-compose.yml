@@ -121,6 +121,10 @@ services:
       - /opt/logs/mysql:/var/lib/mysql-logs:rw
       - ./mysql/my.cnf:/etc/my.cnf:rw
       - ./mysql/init:/docker-entrypoint-initdb.d:rw
+     networks:
+       dev:
+         aliases:
+          - mysql
      container_name: mysql
 
 networks:
