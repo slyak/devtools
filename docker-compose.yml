@@ -108,7 +108,7 @@ services:
      container_name: nexus
 
   mysql:
-     image: mysql/mysql-server:5.7
+     image: mysql:5.7
      restart: always
      privileged: true
      ports:
@@ -116,9 +116,10 @@ services:
      environment:
       - MYSQL_ROOT_PASSWORD:123456
      volumes:
-      - /opt/data/mysql:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/my.cnf
-      - ./mysql/init:/docker-entrypoint-initdb.d/
+      - /opt/data/mysql:/var/lib/mysql:rw
+      - /opt/logs/mysql:/var/lib/mysql-logs:rw
+      - ./mysql/my.cnf:/etc/my.cnf:rw
+      - ./mysql/init:/docker-entrypoint-initdb.d:rw
      container_name: mysql
 
 networks:
