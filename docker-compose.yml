@@ -9,8 +9,8 @@ services:
       - jira
       - bitbucket
       - confluence
-      - portainer
       - bamboo
+      - nexus
     env_file:
       - common.env
     networks:
