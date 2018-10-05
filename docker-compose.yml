@@ -21,6 +21,8 @@ services:
 
   jira:
     image: hub.slyak.com/jira
+    links:
+      - mysql
     restart: always
     privileged: true
     volumes:
@@ -37,6 +39,8 @@ services:
 
   bitbucket:
     image: hub.slyak.com/bitbucket
+    links:
+      - mysql
     restart: always
     privileged: true
     volumes:
@@ -54,6 +58,8 @@ services:
 
   confluence:
     image: hub.slyak.com/confluence
+    links:
+      - mysql
     restart: always
     privileged: true
     volumes:
@@ -70,7 +76,10 @@ services:
 
   bamboo:
     image: hub.slyak.com/bamboo
+    links:
+      - mysql
     restart: always
+    privileged: true
     volumes:
       - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
       - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
@@ -95,6 +104,19 @@ services:
          aliases:
          - nexus
      container_name: nexus
+
+  mysql:
+     image: mysql/mysql-server:5.7
+     restart: always
+     privileged: true
+     ports:
+      - 3306:3306
+     environment:
+        MYSQL_ROOT_PASSWORD:123456
+     volumes:
+      - /opt/data/mysql:/var/lib/mysql
+      - /opt/data/my.cnf:/etc/my.cnf
+     container_name: mysql
 
 networks:
   dev:
