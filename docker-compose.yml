@@ -12,7 +12,8 @@ services:
       - bamboo
       - nexus
     volumes:
-      - /opt/data/nginx/html:/usr/share/nginx/html:ro
+      - /opt/data/nginx/html:/usr/share/nginx/html:rw
+      - /opt/conf/nginx:/etc/nginx/conf.d:rw
     env_file:
       - common.env
     networks:
