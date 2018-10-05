@@ -56,8 +56,6 @@ services:
     image: hub.slyak.com/confluence
     restart: always
     privileged: true
-    links:
-      - crowd
     volumes:
       - /opt/data/atlassian/confluence:/var/atlassian/confluence
 #    ports:
