@@ -20,7 +20,7 @@ services:
     container_name: nginx
 
   jira:
-    image: hub.slyak.com/jira
+    build: ./jira
     links:
       - mysql
     restart: always
