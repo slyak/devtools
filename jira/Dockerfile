@@ -1,5 +1,7 @@
 FROM cptactionhank/atlassian-jira:7.3.6
 
+USER root:root
+
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_WEB      ${JIRA_INSTALL}/atlassian-jira/WEB-INF
@@ -11,7 +13,7 @@ ENV X_PROXY_PORT   80
 ENV X_PATH         /jira
 
 #use mysql
-COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
+#COPY mysql-connector-java-5.1.39.jar ${JIRA_WEB_LIB}/
 
 #jira crack
 COPY atlassian-extras-3.2.jar ${JIRA_WEB_LIB}/
