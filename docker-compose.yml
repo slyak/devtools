@@ -5,12 +5,15 @@ services:
     restart: always
     ports:
       - 80:80
-    depends_on:
-      - jira
-      - bitbucket
-      - confluence
-      - bamboo
-      - nexus
+#    depends_on:
+#      - jira
+#      - bitbucket
+#      - confluence
+#      - bamboo
+#      - nexus
+    volumes:
+      - /opt/data/nginx/html:/opt/data/nginx/html
+      - /opt/data/nginx/conf:/etc/nginx/conf.d
     env_file:
       - common.env
     networks:
@@ -19,110 +22,110 @@ services:
           - nginx
     container_name: nginx
 
-  jira:
-    build: ./jira
-    links:
-      - mysql
-    restart: always
-    privileged: true
-    volumes:
-      - /opt/data/atlassian/jira:/var/atlassian/jira
-    ports:
-      - 8080:8080
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - jira
-    container_name: jira
-
-  bitbucket:
-    image: hub.slyak.com/bitbucket
-    links:
-      - mysql
-    restart: always
-    privileged: true
-    volumes:
-      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
-    ports:
-      - 7990:7990
-      - 7999:7999
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bitbucket
-    container_name: bitbucket
-
-  confluence:
-    image: hub.slyak.com/confluence
-    links:
-      - mysql
-    restart: always
-    privileged: true
-    volumes:
-      - /opt/data/atlassian/confluence:/var/atlassian/confluence
-    ports:
-      - 8090:8090
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-        - confluence
-    container_name: confluence
-
-  bamboo:
-    image: hub.slyak.com/bamboo
-    links:
-      - mysql
-    restart: always
-    privileged: true
-    volumes:
-      - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
-      - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
-    ports:
-        - 8085:8085
-    env_file:
-      - common.env
-    networks:
-      dev:
-        aliases:
-          - bamboo
-    container_name: bamboo
-
-  nexus:
-     image: sonatype/nexus:oss
-     restart: always
-     privileged: true
-     volumes:
-      - /opt/data/nexus:/sonatype-work
-     networks:
-       dev:
-         aliases:
-         - nexus
-     container_name: nexus
-
-  mysql:
-     image: mysql:5.7
-     restart: always
-     privileged: true
-     ports:
-      - 3306:3306
-     environment:
-       MYSQL_ROOT_PASSWORD: 123456
-     volumes:
-      - /opt/data/mysql:/var/lib/mysql:rw
-      - /opt/logs/mysql:/var/lib/mysql-logs:rw
-      - ./mysql/my.cnf:/etc/my.cnf:rw
-      - ./mysql/init:/docker-entrypoint-initdb.d:rw
-     networks:
-       dev:
-         aliases:
-          - mysql
-     container_name: mysql
+#  jira:
+#    build: ./jira
+#    links:
+#      - mysql
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /opt/data/atlassian/jira:/var/atlassian/jira
+#    ports:
+#      - 8080:8080
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - jira
+#    container_name: jira
+#
+#  bitbucket:
+#    image: hub.slyak.com/bitbucket
+#    links:
+#      - mysql
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
+#    ports:
+#      - 7990:7990
+#      - 7999:7999
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - bitbucket
+#    container_name: bitbucket
+#
+#  confluence:
+#    image: hub.slyak.com/confluence
+#    links:
+#      - mysql
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /opt/data/atlassian/confluence:/var/atlassian/confluence
+#    ports:
+#      - 8090:8090
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#        - confluence
+#    container_name: confluence
+#
+#  bamboo:
+#    image: hub.slyak.com/bamboo
+#    links:
+#      - mysql
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
+#      - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
+#    ports:
+#        - 8085:8085
+#    env_file:
+#      - common.env
+#    networks:
+#      dev:
+#        aliases:
+#          - bamboo
+#    container_name: bamboo
+#
+#  nexus:
+#     image: sonatype/nexus:oss
+#     restart: always
+#     privileged: true
+#     volumes:
+#      - /opt/data/nexus:/sonatype-work
+#     networks:
+#       dev:
+#         aliases:
+#         - nexus
+#     container_name: nexus
+#
+#  mysql:
+#     image: mysql:5.7
+#     restart: always
+#     privileged: true
+#     ports:
+#      - 3306:3306
+#     environment:
+#       MYSQL_ROOT_PASSWORD: 123456
+#     volumes:
+#      - /opt/data/mysql:/var/lib/mysql:rw
+#      - /opt/logs/mysql:/var/lib/mysql-logs:rw
+#      - ./mysql/my.cnf:/etc/my.cnf:rw
+#      - ./mysql/init:/docker-entrypoint-initdb.d:rw
+#     networks:
+#       dev:
+#         aliases:
+#          - mysql
+#     container_name: mysql
 
 networks:
   dev:

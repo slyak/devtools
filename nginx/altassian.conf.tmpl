@@ -1,5 +1,6 @@
 server {
     server_name ${X_PROXY_NAME};
+    root        /opt/data/nginx/html;
 
     location /jira {
         proxy_set_header X-Forwarded-Host $host;
