@@ -1,7 +1,5 @@
 FROM nginx:1.13.3
 
-USER ROOT:ROOT
-
 ENV X_PROXY_NAME  dev.slyak.com
 
 COPY index.html /opt/data/nginx/
