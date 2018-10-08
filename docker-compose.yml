@@ -13,7 +13,6 @@ services:
 #      - nexus
     volumes:
       - /opt/data/nginx/html:/opt/data/nginx/html
-      - /opt/data/nginx/conf:/etc/nginx/conf.d
     env_file:
       - common.env
     networks:
