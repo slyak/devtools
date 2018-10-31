@@ -96,11 +96,11 @@ services:
     container_name: bamboo
 
   nexus:
-     image: sonatype/nexus:oss
+     image: sonatype/nexus3
      restart: always
      privileged: true
      volumes:
-      - /opt/data/nexus:/sonatype-work
+      - /opt/data/nexus:/nexus-data
      networks:
        dev:
          aliases:
