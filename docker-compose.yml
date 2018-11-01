@@ -105,6 +105,8 @@ services:
        dev:
          aliases:
          - nexus
+     env_file:
+       - common.env
      container_name: nexus
 
   mysql:
