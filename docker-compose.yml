@@ -105,6 +105,11 @@ services:
        dev:
          aliases:
          - nexus
+     ports:
+         - 8081:8081
+         #for docker
+         - 8082:8082
+         - 8083:8083
      environment:
        - NEXUS_CONTEXT=nexus
      container_name: nexus
