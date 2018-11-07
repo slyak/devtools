@@ -86,6 +86,7 @@ services:
       - /opt/data/atlassian/bamboo:/var/atlassian/bamboo
       - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
       - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker:ro
     ports:
         - 8085:8085
     env_file:
