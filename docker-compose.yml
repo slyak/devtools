@@ -137,3 +137,4 @@ services:
 
 networks:
   dev:
+    network_mode: "host"
