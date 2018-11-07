@@ -6,3 +6,8 @@ vi /etc/ssh/ssh_config
 exit
 docker cp bitbucket:/root/.ssh/id_rsa.pub /opt/data
 docker cp /opt/data/id_rsa.pub bamboo:/root/.ssh/authorized_keys/
+
+
+
+#bamboo
+1. install maven
