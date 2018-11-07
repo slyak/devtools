@@ -8,3 +8,4 @@ RUN apt-get update \
     && mkdir /usr/lib/maven \
     && tar -zxf apache-maven-3.2.5-bin.tar.gz  -C /usr/lib/maven
 COPY maven.sh /etc/profile.d/
+RUN source ~/etc/profile
