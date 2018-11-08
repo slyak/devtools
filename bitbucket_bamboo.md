@@ -11,3 +11,5 @@ docker cp /opt/data/id_rsa.pub bamboo:/root/.ssh/authorized_keys/
 
 #bamboo
 1. install maven
+
+ssh-keygen -t rsa -f /opt/data/ssh/buibucket -q -N ""
