@@ -46,4 +46,22 @@ server {
         proxy_pass http://$upstream_nexus:8081/nexus;
         client_max_body_size 10M;
     }
+
+    location /docker-private {
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $upstream_nexus nexus;
+        proxy_pass http://$upstream_nexus:8082;
+        client_max_body_size 10M;
+    }
+
+    location /docker-public {
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        set $upstream_nexus nexus;
+        proxy_pass http://$upstream_nexus:8083;
+        client_max_body_size 10M;
+    }
 }
