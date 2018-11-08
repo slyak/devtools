@@ -47,6 +47,7 @@ services:
     privileged: true
     volumes:
       - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
+      - /opt/ssh:/root/.ssh:ro
     ports:
       - 7990:7990
       - 7999:7999
@@ -87,6 +88,8 @@ services:
       - /opt/data/atlassian/bamboo/logs:/opt/atlassian/bamboo/logs
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker:ro
+      - /etc/docker:/etc/docker:ro
+      - /opt/ssh:/root/.ssh:ro
     ports:
         - 8085:8085
     env_file:
