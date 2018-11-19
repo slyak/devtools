@@ -49,7 +49,7 @@ services:
       - /opt/data/atlassian/bitbucket:/var/atlassian/bitbucket
     ports:
       - 7990:7990
-      - 7999:7999
+      - 8084:8084
     env_file:
       - common.env
     networks:
