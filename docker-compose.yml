@@ -11,6 +11,12 @@ services:
       - confluence
       - bamboo
       - nexus
+    links:
+      - jira
+      - bitbucket
+      - confluence
+      - bamboo
+      - nexus
     volumes:
       - /opt/data/nginx/html:/opt/data/nginx/html
     env_file:
